@@ -1,2 +1,18 @@
 # ST7305-YDP213H001-V3---STM32-HAL-SPI-Driver
 YDP213H001-V3 monochrome display controller (reflective, no backlight) on an SPI controller: ST7305 chip
+
+The controller is provided “as is.”
+It enables STM32 microprocessors to interface with the YDP213H001-V3 display.
+
+Functions:
+- Controller initialization,
+- Clearing the image buffer in the ST7305 chip,
+- Clearing the entire screen to white,
+- Turning on a black screen (all pixels black),
+- Rotating the screen by 0, 90, 180, or 270 degrees,
+- Displaying text (I used the font file from the SSD1306),
+- Displaying bitmaps from an external file containing a bitmap array,
+- Displaying shapes: straight line, transparent rectangle, white-filled rectangle, black-filled rectangle, transparent circle, white-filled circle, black-filled circle.
+
+I wrote the driver so that after each transmission, the display enters sleep mode and wakes up only during data transfer—which should help conserve power.
+I implemented screen refresh using partial refresh, which also helps with data transfer speed.
