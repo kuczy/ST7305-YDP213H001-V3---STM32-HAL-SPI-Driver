@@ -26,5 +26,12 @@ WAŻNE: w pliku st7305.h zmień #include na swój typ miktoprocesora:
 ```
 
 SPI Configuration:
-You can use the configuration shown here—I used SPI1:
+You can use the configuration shown here—I used SPI1.
+The pin names don't matter for SPI:
+
 ![SPI_Config](_images/SPI-configuration.jpg)
+
+GPIO Configuration:
+Add GPIO pins to your project—you don't have to follow the standard pin naming convention—the port and pin names are specified when the controller is initialized. Here's how it looks in my code:
+
+![GPIO_Config](_images/GPIO-configuration.jpg)
