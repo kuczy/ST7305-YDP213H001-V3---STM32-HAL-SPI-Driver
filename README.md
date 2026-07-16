@@ -34,3 +34,30 @@ GPIO Configuration:
 Add GPIO pins to your project—you don't have to follow the standard pin naming convention—the port and pin names are specified when the controller is initialized. Here's how it looks in my code:
 
 ![GPIO_Config](_images/GPIO-configuration.jpg)
+
+Implementation in the main.c file:
+```
+/* USER CODE BEGIN Includes */
+#include <stdio.h>
+#include "st7305.h"         // ST7305 chip driver file
+#include "st7305_font.h"    // Font support file
+#include "st7305_paint.h"   // Drawing functions support file
+#include "images.h"         // File containing graphics in the form of bitmaps
+/* USER CODE END Includes */
+```
+
+```
+/* USER CODE BEGIN PV */
+static st7305_t lcd;         // The name of the display instance we will be referring to
+/* USER CODE END PV */
+```
+
+```
+/* USER CODE BEGIN 2 */
+	ST7305_Init(&lcd, &hspi1,
+	            LCD_CS_GPIO_Port,  LCD_CS_Pin,   // Enter the names of the GPIO ports/pins you have assigned in your project
+	            LCD_DC_GPIO_Port,  LCD_DC_Pin,   // Enter the names of the GPIO ports/pins you have assigned in your project
+	            LCD_RST_GPIO_Port, LCD_RST_Pin,  // Enter the names of the GPIO ports/pins you have assigned in your project
+	            90);
+	ST7305_ClearBuffer(&lcd);                    // Clearing the internal memory buffer in the ST7305 chip in the display
+/* USER CODE END 2 */
