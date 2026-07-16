@@ -52,7 +52,7 @@ static st7305_t lcd;         // The name of the display instance we will be refe
 
 ```
 /* USER CODE BEGIN 2 */
-	ST7305_Init(&lcd, &hspi1,
+	ST7305_Init(&lcd, &hspi1,					 // Reference to the instance name and specification of the SPI for communication
 	            LCD_CS_GPIO_Port,  LCD_CS_Pin,   // Enter the names of the GPIO ports/pins you have assigned in your project
 	            LCD_DC_GPIO_Port,  LCD_DC_Pin,   // Enter the names of the GPIO ports/pins you have assigned in your project
 	            LCD_RST_GPIO_Port, LCD_RST_Pin,  // Enter the names of the GPIO ports/pins you have assigned in your project
