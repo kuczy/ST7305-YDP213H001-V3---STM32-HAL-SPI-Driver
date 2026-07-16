@@ -59,5 +59,20 @@ static st7305_t lcd;         // The name of the display instance we will be refe
 	            LCD_DC_GPIO_Port,  LCD_DC_Pin,   // Enter the names of the GPIO ports/pins you have assigned in your project
 	            LCD_RST_GPIO_Port, LCD_RST_Pin,  // Enter the names of the GPIO ports/pins you have assigned in your project
 	            90);							 // Screen Rotation Settings
-	ST7305_ClearBuffer(&lcd);                    // Clearing the internal memory buffer in the ST7305 chip in the display
 /* USER CODE END 2 */
+```
+Functions (examples of usage):
+```
+ST7305_ClearBuffer(&lcd);                    // Clearing the internal memory buffer in the ST7305 chip in the display
+ST7305_Flush(&lcd);							 // Send data to be displayed. (Do this every time you want to display data on the screen.)
+
+ST7305_ClearAllWhite(&lcd); // Fill the screen with white
+ST7305_ClearAllBlack(&lcd); // Fill the screen with black
+ST7305_DrawString(&lcd, 10, 10, "FONT TEST", &Font_7x10, ST7305_COLOR_BLACK); // Write black text using the selected font at the specified coordinates
+ST7305_Paint_Line(&lcd, 5, 5, 20, 20, 1, ST7305_COLOR_BLACK); // Drawing a line between coordinates—a black line 1 pixel thick (the thickness and color can be adjusted)
+ST7305_Paint_Rect(&lcd, 5, 5, 50, 50, 2, ST7305_FILL_TRANSPARENT, ST7305_COLOR_BLACK); //Draw a transparent rectangle with a 2px-thick line (the pixels inside will remain unaffected)
+ST7305_Paint_Rect(&lcd, 5, 5, 50, 50, 1, ST7305_FILL_BLACK, ST7305_COLOR_BLACK); // Drawing a black rectangle with a line thickness of 1px
+ST7305_Paint_Circle(&lcd, 5, 5, 40, 40, 2, ST7305_FILL_WHITE, ST7305_COLOR_BLACK); // Drawing a circle with a 2px line—a white circle in the center (clears any previous data inside)
+ST7305_Paint_Circle(&lcd, 5, 5, 40, 30, 1, ST7305_FILL_BLACK, ST7305_COLOR_BLACK); // Drawing a Black Ellipse
+
+```
