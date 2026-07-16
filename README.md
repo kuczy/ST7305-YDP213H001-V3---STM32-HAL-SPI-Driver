@@ -7,8 +7,8 @@ It enables STM32 microprocessors to interface with the YDP213H001-V3 display.
 Functions:
 - Controller initialization,
 - Clearing the image buffer in the ST7305 chip,
-- Clearing the entire screen to white,
-- Turning on a black screen (all pixels black),
+- Filling the screen with white,
+- Filling the screen with black,
 - Rotating the screen by 0, 90, 180, or 270 degrees,
 - Displaying text (I used the font file from the SSD1306),
 - Displaying bitmaps from an external file containing a bitmap array,
