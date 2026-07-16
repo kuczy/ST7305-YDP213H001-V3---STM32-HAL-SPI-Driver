@@ -58,6 +58,6 @@ static st7305_t lcd;         // The name of the display instance we will be refe
 	            LCD_CS_GPIO_Port,  LCD_CS_Pin,   // Enter the names of the GPIO ports/pins you have assigned in your project
 	            LCD_DC_GPIO_Port,  LCD_DC_Pin,   // Enter the names of the GPIO ports/pins you have assigned in your project
 	            LCD_RST_GPIO_Port, LCD_RST_Pin,  // Enter the names of the GPIO ports/pins you have assigned in your project
-	            90);
+	            90);							 // Screen Rotation Settings
 	ST7305_ClearBuffer(&lcd);                    // Clearing the internal memory buffer in the ST7305 chip in the display
 /* USER CODE END 2 */
