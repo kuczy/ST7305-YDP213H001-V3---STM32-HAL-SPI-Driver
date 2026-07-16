@@ -63,8 +63,8 @@ static st7305_t lcd;         // The name of the display instance we will be refe
 ```
 Functions (examples of usage):
 ```
-ST7305_ClearBuffer(&lcd);                    // Clearing the internal memory buffer in the ST7305 chip in the display
-ST7305_Flush(&lcd);							 // Send data to be displayed. (Do this every time you want to display data on the screen.)
+ST7305_ClearBuffer(&lcd); // Clearing the internal memory buffer in the ST7305 chip in the display
+ST7305_Flush(&lcd); // Send data to be displayed. (Do this every time you want to display data on the screen.)
 
 ST7305_ClearAllWhite(&lcd); // Fill the screen with white
 ST7305_ClearAllBlack(&lcd); // Fill the screen with black
