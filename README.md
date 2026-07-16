@@ -19,8 +19,12 @@ I implemented screen refresh using partial refresh, which also helps with data t
 
 -----------------------------------------------------------------------------------------------------------------------------
 Użytkowanie:
-1. WAŻNE: w pliku st7305.h zmień #include na swój typ miktoprocesora:
+WAŻNE: w pliku st7305.h zmień #include na swój typ miktoprocesora:
    
 ```
 #include "stm32l0xx_hal.h" /* change to match your STM32 family, e.g. stm32l4xx_hal.h */
 ```
+
+SPI Configuration:
+You can use the configuration shown here—I used SPI1:
+![SPI_Config](_images/SPI-configuration.jpg)
