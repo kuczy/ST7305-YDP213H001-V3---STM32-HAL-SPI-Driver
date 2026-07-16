@@ -16,9 +16,11 @@ Functions:
 
 I wrote the driver so that after each transmission, the display enters sleep mode and wakes up only during data transfer—which should help conserve power.
 I implemented screen refresh using partial refresh, which also helps with data transfer speed.
-<hr>
+
+
 Użytkowanie:
 1. WAŻNE: w pliku st7305.h zmień #include na swój typ miktoprocesora:
+   
 ```
 #include "stm32l0xx_hal.h" /* change to match your STM32 family, e.g. stm32l4xx_hal.h */
 ```
