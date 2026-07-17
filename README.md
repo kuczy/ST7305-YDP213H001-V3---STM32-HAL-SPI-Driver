@@ -3,6 +3,8 @@ YDP213H001-V3 monochrome display controller (reflective, no backlight) on an SPI
 The controller is provided “as is.”
 It enables STM32 microprocessors to interface with the YDP213H001-V3 display.
 
+![Demo code](_images/demo.jpg)
+
 Functions:
 - Controller initialization,
 - Clearing the image buffer in the ST7305 chip,
@@ -73,4 +75,34 @@ ST7305_Paint_Rect(&lcd, 5, 5, 50, 50, 1, ST7305_FILL_BLACK, ST7305_COLOR_BLACK);
 ST7305_Paint_Circle(&lcd, 5, 5, 40, 40, 2, ST7305_FILL_WHITE, ST7305_COLOR_BLACK); // Drawing a circle with a 2px line—a white circle in the center (clears any previous data inside)
 ST7305_Paint_Circle(&lcd, 5, 5, 40, 30, 1, ST7305_FILL_BLACK, ST7305_COLOR_BLACK); // Drawing a Black Ellipse
 
+```
+
+DEMO CODE code—see the image above::
+```
+/* USER CODE BEGIN 2 */
+
+	ST7305_Init(&lcd, &hspi1,
+	            LCD_CS_GPIO_Port,  LCD_CS_Pin,
+	            LCD_DC_GPIO_Port,  LCD_DC_Pin,
+	            LCD_RST_GPIO_Port, LCD_RST_Pin,
+	            90);
+
+	ST7305_ClearBuffer(&lcd);
+
+	ST7305_DrawString(&lcd, 30, 6, "https://github.com/kuczy", &Font_7x10, ST7305_COLOR_BLACK);
+	ST7305_Paint_Rect(&lcd, 20, 3, 210, 15, 1, ST7305_FILL_TRANSPARENT, ST7305_COLOR_BLACK);
+	ST7305_DrawBitmap(&lcd, 5, 18, 100, 100, img_qrCode);
+	ST7305_Paint_Rect(&lcd, 110, 25, 50, 30, 2, ST7305_FILL_BLACK, ST7305_COLOR_BLACK);
+	ST7305_Paint_Circle(&lcd, 115, 40, 40, 40, 2, ST7305_FILL_BLACK, ST7305_COLOR_WHITE);
+	ST7305_Paint_Rect(&lcd, 110, 60, 50, 30, 2, ST7305_FILL_TRANSPARENT, ST7305_COLOR_BLACK);
+	ST7305_DrawString(&lcd, 170, 40, "ST7305", &Font_11x18, ST7305_COLOR_BLACK);
+	ST7305_Paint_Line(&lcd, 10, 115, 200, 115, 2, ST7305_COLOR_BLACK);
+	ST7305_Paint_Line(&lcd, 200, 115, 215, 100, 2, ST7305_COLOR_BLACK);
+	ST7305_Paint_Line(&lcd, 215, 100, 240, 100, 2, ST7305_COLOR_BLACK);
+	ST7305_Paint_Rect(&lcd, 190, 75, 55, 20, 0, ST7305_FILL_BLACK, ST7305_COLOR_BLACK);
+	ST7305_DrawString(&lcd, 200, 80, "ENJOY", &Font_7x10, ST7305_COLOR_WHITE);
+
+	ST7305_Flush(&lcd);
+
+/* USER CODE END 2 */
 ```
