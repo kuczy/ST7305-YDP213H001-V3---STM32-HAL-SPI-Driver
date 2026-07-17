@@ -41,12 +41,28 @@ uint8_t ST7305_DrawChar(st7305_t *dev, int16_t x, int16_t y, char ch,
 void ST7305_DrawString(st7305_t *dev, int16_t x, int16_t y, const char *str,
                         const SSD1306_Font_t *font, st7305_color_t color)
 {
+    /* Same background inference as ST7305_DrawChar() - kept in sync so
+     * the inter-glyph gap matches whatever DrawChar used as background. */
+    st7305_color_t bg_color = (color == ST7305_COLOR_BLACK) ? ST7305_COLOR_WHITE : ST7305_COLOR_BLACK;
+
     int16_t cursor_x = x;
 
     while (*str != '\0') {
         uint8_t w = ST7305_DrawChar(dev, cursor_x, y, *str, font, color);
-        cursor_x = (int16_t)(cursor_x + w + 1); /* +1px spacing between glyphs */
+        cursor_x = (int16_t)(cursor_x + w);
+
         str++;
+        if (*str != '\0') {
+            /* 1px spacing column between this glyph and the next one -
+             * paint it with the background color instead of leaving it
+             * untouched, otherwise whatever was on screen there before
+             * (opposite-color pixels from old text, a bitmap, a shape)
+             * shows through as a thin line between letters. */
+            for (uint8_t row = 0; row < font->height; row++) {
+                ST7305_SetPixel(dev, cursor_x, (int16_t)(y + row), bg_color);
+            }
+            cursor_x = (int16_t)(cursor_x + 1);
+        }
     }
 }
 

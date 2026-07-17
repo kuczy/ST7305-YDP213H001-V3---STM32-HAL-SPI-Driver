@@ -364,15 +364,20 @@ st7305_color_t ST7305_GetPixel(st7305_t *dev, int16_t x, int16_t y)
 void ST7305_DrawBitmap(st7305_t *dev, int16_t x, int16_t y,
                         uint8_t w, uint8_t h, const uint8_t *bitmap)
 {
+    /* Opaque drawing (same reasoning as ST7305_DrawChar's fix): every
+     * pixel in the w x h footprint is written - black where the bitmap
+     * has a set bit, white everywhere else. Previously only set bits
+     * were drawn and 0-bits were left untouched, so any old content
+     * (text, another bitmap, shapes) underneath a bitmap's white areas
+     * stayed visible and bled through, making the image unreadable. */
     uint8_t stride = (uint8_t)((w + 7u) / 8u);
 
     for (uint8_t row = 0; row < h; row++) {
         for (uint8_t col = 0; col < w; col++) {
             uint8_t byte = bitmap[row * stride + (col >> 3)];
             uint8_t bit  = (uint8_t)(0x80 >> (col & 7));
-            if (byte & bit) {
-                ST7305_SetPixel(dev, (int16_t)(x + col), (int16_t)(y + row), ST7305_COLOR_BLACK);
-            }
+            st7305_color_t pixel_color = (byte & bit) ? ST7305_COLOR_BLACK : ST7305_COLOR_WHITE;
+            ST7305_SetPixel(dev, (int16_t)(x + col), (int16_t)(y + row), pixel_color);
         }
     }
 }

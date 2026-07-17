@@ -210,7 +210,16 @@ st7305_color_t ST7305_GetPixel(st7305_t *dev, int16_t x, int16_t y);
  * bytes/row) into the framebuffer at (x, y). This is the same format
  * u8g2 XBM/glyphs and most "image2cpp"-style converters produce, so it
  * doubles as your bitmap AND your font glyph blitter: render each glyph
- * to a small bitmap (or call SetPixel per glyph pixel) and pass it here. */
+ * to a small bitmap (or call SetPixel per glyph pixel) and pass it here.
+ *
+ * Drawing is OPAQUE: every pixel in the w x h footprint is written -
+ * black where the bitmap has a set bit, white everywhere else - so
+ * redrawing a bitmap over old content (text, another bitmap, shapes)
+ * always fully replaces it, no remnants left behind. If you draw a
+ * SMALLER bitmap over a spot that previously held a LARGER one, the
+ * area outside the new bitmap's footprint isn't touched - clear that
+ * region yourself first if needed (e.g. ST7305_ClearAllWhite() or a
+ * SetPixel/Paint_Rect loop over just that rectangle). */
 void ST7305_DrawBitmap(st7305_t *dev, int16_t x, int16_t y,
                         uint8_t w, uint8_t h, const uint8_t *bitmap);
 

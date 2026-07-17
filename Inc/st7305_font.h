@@ -59,10 +59,14 @@ uint8_t ST7305_DrawChar(st7305_t *dev, int16_t x, int16_t y, char ch,
                          const SSD1306_Font_t *font, st7305_color_t color);
 
 /* Draws a NUL-terminated string starting at (x, y), advancing left to
- * right with 1px spacing between glyphs. Does not wrap; characters that
- * would land past ST7305_WIDTH are still drawn (and clipped for free by
- * ST7305_SetPixel's bounds check) but the cursor keeps advancing off-
- * screen, so break your own strings into lines for a multi-line UI. */
+ * right with 1px spacing between glyphs. That 1px gap is painted with
+ * the background color too (not left untouched), so old content
+ * between letters (from previous text, a bitmap, a shape) doesn't show
+ * through as thin lines - the whole string draws as one solid opaque
+ * block. Does not wrap; characters that would land past ST7305_WIDTH
+ * are still drawn (and clipped for free by ST7305_SetPixel's bounds
+ * check) but the cursor keeps advancing off-screen, so break your own
+ * strings into lines for a multi-line UI. */
 void ST7305_DrawString(st7305_t *dev, int16_t x, int16_t y, const char *str,
                         const SSD1306_Font_t *font, st7305_color_t color);
 
