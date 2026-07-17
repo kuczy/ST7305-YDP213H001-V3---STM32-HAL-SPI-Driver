@@ -106,3 +106,11 @@ DEMO CODE code—see the image above::
 
 /* USER CODE END 2 */
 ```
+Image conversion:
+I used the online converter at: https://mischianti.org/images-to-byte-array-online-converter-cpp-arduino/
+
+Settings:
+- background color: white,
+- Invert image colors: checked (important),
+- Code output format: plain bytes,
+- Draw mode: Horizontal, 1 bit per pixel
